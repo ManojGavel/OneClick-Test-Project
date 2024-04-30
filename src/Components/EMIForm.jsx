@@ -101,7 +101,9 @@ const EMIForm = () => {
       <TextField
         label="Start Time"
         type="time"
-        {...register("startTime", { required: "Start time is required" })}
+        {...register("startTime", 
+        // { required: "Start time is required" }
+    )}
         error={Boolean(errors.startTime)}
         helperText={errors.startTime?.message}
       />
@@ -109,7 +111,9 @@ const EMIForm = () => {
         label="Duration"
         type="number"
         step="0.5"
-        {...register("duration", { required: "Duration is required" })}
+        {...register("duration",
+        //  { required: "Duration is required" }
+        )}
         error={Boolean(errors.duration)}
         helperText={errors.duration?.message}
       />
