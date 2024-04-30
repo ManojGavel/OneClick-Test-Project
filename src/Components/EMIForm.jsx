@@ -89,8 +89,14 @@ const EMIForm = () => {
         helperText={errors.endDate?.message}
         disabled={!startDate}
         inputProps={{
-            min: startDate ? new Date(new Date(startDate).setMonth(new Date(startDate).getMonth() + 1)).toISOString().split('T')[0] : null,
-          }}
+          min: startDate
+            ? new Date(
+                new Date(startDate).setMonth(new Date(startDate).getMonth() + 1)
+              )
+                .toISOString()
+                .split("T")[0]
+            : null,
+        }}
       />
       <div>
         <Button variant="contained" size="small" color="primary" type="submit">
@@ -101,9 +107,10 @@ const EMIForm = () => {
       <TextField
         label="Start Time"
         type="time"
-        {...register("startTime", 
-        // { required: "Start time is required" }
-    )}
+        {...register(
+          "startTime"
+          // { required: "Start time is required" }
+        )}
         error={Boolean(errors.startTime)}
         helperText={errors.startTime?.message}
       />
@@ -111,22 +118,22 @@ const EMIForm = () => {
         label="Duration"
         type="number"
         step="0.5"
-        {...register("duration",
-        //  { required: "Duration is required" }
+        {...register(
+          "duration"
+
         )}
         error={Boolean(errors.duration)}
         helperText={errors.duration?.message}
       />
       <div>
-      <Button
-      size="small"
-        variant="contained"
-        color="primary"
-        onClick={handleSubmit(handleTimeSlot)}
-      >
-        Add Time Slot
-      </Button>
-
+        <Button
+          size="small"
+          variant="contained"
+          color="primary"
+          onClick={handleSubmit(handleTimeSlot)}
+        >
+          Add Time Slot
+        </Button>
       </div>
       {timeSlots.map((slot, index) => (
         <Typography key={index}>
