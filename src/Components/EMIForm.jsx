@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, TextField, Container, Typography } from "@mui/material";
 
@@ -24,17 +24,6 @@ const EMIForm = () => {
     const lastEMI = totalAmount - emiAmount * (months - 1);
 
     setEMI({ monthly: emiAmount, last: lastEMI });
-
-    console.log(
-      emiAmount,
-      "emiAmount",
-      lastEMI,
-      "lastEMI",
-      totalAmount,
-      "totalAmount",
-      months,
-      "months"
-    );
   };
 
   const handleStartDateChange = (event) => {
@@ -100,12 +89,14 @@ const EMIForm = () => {
         helperText={errors.endDate?.message}
         disabled={!startDate}
         inputProps={{
-          min: startDate,
-        }}
+            min: startDate ? new Date(new Date(startDate).setMonth(new Date(startDate).getMonth() + 1)).toISOString().split('T')[0] : null,
+          }}
       />
-      <Button variant="contained" color="primary" type="submit">
-        Calculate EMI
-      </Button>
+      <div>
+        <Button variant="contained" size="small" color="primary" type="submit">
+          Calculate EMI
+        </Button>
+      </div>
       <Typography variant="h4">Time Slot Management</Typography>
       <TextField
         label="Start Time"
@@ -122,13 +113,17 @@ const EMIForm = () => {
         error={Boolean(errors.duration)}
         helperText={errors.duration?.message}
       />
+      <div>
       <Button
+      size="small"
         variant="contained"
         color="primary"
         onClick={handleSubmit(handleTimeSlot)}
       >
         Add Time Slot
       </Button>
+
+      </div>
       {timeSlots.map((slot, index) => (
         <Typography key={index}>
           Slot {index + 1}: {slot.start} - {slot.end}
